@@ -11,6 +11,8 @@ Python script to receive updates from an AirVision NVR (v2.0.0)
 
 ## Usage
 
+Runs a command when the NVR detects motion:
+
 ```
 python motion.py --server=https://airvision-nvr:7443 \
                  --user=airvision@example.org \
@@ -20,4 +22,4 @@ python motion.py --server=https://airvision-nvr:7443 \
 
 ## Version
 
-Still messy. Hacked up one Saturday afternoon that I hope someone finds useful.
+Still messy. Hacked up one Saturday afternoon and I hope someone finds it useful.
