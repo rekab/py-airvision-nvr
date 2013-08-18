@@ -1,10 +1,10 @@
 py-airvision-nvr
 ================
 
-Python script to receive updates from an AirVision NVR (v2.0.0)
+Python script to receive updates from an AirVision NVR v1.2.
 
 ## Pre-reqs
-* AirVision v2
+* AirVision v1.2
  * Tested with 1 camera set to record on motion.
 * websocket-client, available at https://github.com/liris/websocket-client
 * Tested with Python 2.7.3

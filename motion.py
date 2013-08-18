@@ -29,6 +29,14 @@ class Cooldown(object):
     self._times = {}
 
   def Update(self, key, duration):
+    """Update a cooldown timer.
+
+    Args:
+      key: string
+      duration: integer, number of seconds to wait.
+    Returns:
+      True if sufficient time has passed since the key was last seen.
+    """
     prev = self._times.get(key, 0)
     self._times[key] = time.time()
     return int(duration) <= (time.time() - prev)
@@ -37,7 +45,7 @@ class Cooldown(object):
 def main():
   flags = SetupFlags()
   if not flags.server.endswith('/'):
-    flags.server = flags.server + '/'
+    flags.server += '/'
 
   server = airvision.Server(flags.server, flags.user, flags.password)
   conn = airvision.CreateAirvisionNVRConnection(server)
@@ -46,16 +54,16 @@ def main():
   cooldown = Cooldown()
   while True:
     msg = conn.Read()
-    print 'msg=%s' % msg
+    print 'ServerMessage: %s' % msg
     state.UpdateFromServerMessage(msg)
     for motion_event in airvision.GetMotionEvents(state, msg):
       if cooldown.Update(motion_event.zones, flags.cooldown):
         command = flags.command % motion_event.__dict__
-        print 'running command=%s' % command
+        print 'Running command: %s' % command
         status = os.system(command)
-        print 'command exited with %d' % status
+        print 'Command exit status: %d' % status
       else:
-        print 'cooldown still active for "%s"' % motion_event.zones
+        print 'Cooldown still active for "%s".' % motion_event.zones
 
 
 if __name__ == '__main__':

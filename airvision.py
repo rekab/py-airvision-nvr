@@ -104,7 +104,7 @@ def _CreateWebsocket(server, cookie):
     connected websocket object
   """
   url = server.url.replace('https', 'wss') + 'ws/update'
-  print 'url=%s' % url
+  print 'Connecting to websocket url: %s' % url
   socket = websocket.create_connection(
       url, header=['Cookie: %s=%s' % (cookie.name, cookie.value)])
   return socket
@@ -133,7 +133,7 @@ class AirvisionNVRConnection(object):
         'payload': {'channels': channels},
         'token': self.cookie.value,
       }
-    print 'Subscribing to:', ', '.join(channels)
+    print 'Subscribing to NVR channels:', ', '.join(channels)
     self.socket.send(json.dumps(subscription))
 
 
@@ -185,7 +185,7 @@ class ServerMessage(object):
     self.additions.append(data)
 
   def __str__(self):
-    return 'updates: "%s" additions: "%s"' % (
+    return 'updates: <%s> additions: <%s>' % (
         ', '.join([str(u) for u in self.updates]),
         ', '.join([str(u) for u in self.additions]))
 
