@@ -11,10 +11,12 @@ Python script to receive updates from an AirVision NVR (v2.0.0)
 
 ## Usage
 
-  python motion.py --server=https://airvision-nvr:7443 \
+```
+python motion.py --server=https://airvision-nvr:7443 \
                  --user=airvision@example.org \
                  --password=hunter2 \
                  --command='/usr/bin/espeak "motion detected in %(zones)s at %(time)s"'
+```
 
 ## Version
 
